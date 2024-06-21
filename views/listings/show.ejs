@@ -1,0 +1,66 @@
+<% layout("/layouts/boilerplate") -%>
+
+    <body>
+        <br>
+        <div class="row">
+            <div class="col-8 offset-3">
+                <h3> <b>
+                        <%= listing.title %>
+                    </b></h3>
+            </div>
+            <div class="card col-8 offset-3 listing-card" style="width: 18rem;">
+                <img src="<%= listing.image %>" class="card-img-top show-img" alt="Listing image">
+                <br>
+                <div class="card-body">
+                    <p class="det">
+                        Owned by : <i>
+                            <%= listing.owner.username %>
+                        </i>
+                    </p>
+                    <p class="det">
+                        <%= listing.description %>
+                    </p>
+                    <p class="det">&#x20B9; <%= listing.price.toLocaleString("en-IN") %>/ Night</p>
+                    <p class="det">
+                        <%= listing.location %>
+                    </p>
+                    <p class="det">
+                        <%= listing.country %>
+                    </p>
+                </div>
+            </div>
+            <div class="btns offset-3">
+                <form method="get" action="/listings/<%= listing._id  %>/edit">
+                    <button class="btn btn-dark ">Edit</button>
+                </form><br>
+                <form method="post" action="/listings/<%= listing._id  %>?_method=delete">
+                    <button class="btn btn-dark offset-3">Delete</button>
+            </div>
+            </form>
+
+        </div>
+        <br>
+        <div class="col-8 offset-3">
+            <hr>
+            <h4>Leave a Review</h4>
+            <form action="/listings/<%= listing._id %>/reviews" method="post" novalidate class="needs-validation">
+                <div class="mb-3 mt-3  ">
+                    <label class="form-label" for="rating">Rating</label>
+                    <input class="form-range" type="range" min="1" max="5" name="review[rating]" id="rating">
+                </div>
+                <div class="mb-3 mt-3">
+                    <label class="form-label" for="comment">Comment</label>
+                    <textarea class="form-control" name="review[comment]" id="comment" cols="30" rows="7"
+                        required></textarea>
+                    <div class="invalid-feedback">
+                        please add some comments for review
+                    </div>
+                </div>
+                <button class="btn btn-dark">Submit</button>
+            </form>
+        </div>
+        <br>
+
+        </div>
+        <br><br>
+    </body>
